@@ -13,9 +13,21 @@ class DateBox extends React.Component {
     }
     render() {
         return (
-         	{MONTH_NUM_TO_STRING[this.props.month]} {Inflected.ordinalize(this.props.day)}, {this.props.year}
+        	<div>
+         		{MONTH_NUM_TO_STRING[this.props.month]} {Inflected.ordinalize(this.props.day)}, {this.props.year}
+         	</div>
         )
     }
 }
 
-export default DateBox;
+
+function mapStateToProps (state){
+	return {
+		month: state.calendar.month,
+		day: state.calendar.selectedDayOfMonth,
+		year: state.calendar.year
+	}
+}
+
+export default connect(mapStateToProps)(DateBox);
+

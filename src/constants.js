@@ -1,6 +1,7 @@
 export const PREV_MONTH = 'previous month';
 export const NEXT_MONTH = 'next month';
 export const SELECT_DATE = 'select date';
+export const SELECT_MONTH = 'select month';
 
 export const MONTH_NUM_TO_STRING = {
   0: 'January',
