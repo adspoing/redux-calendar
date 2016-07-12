@@ -1,5 +1,5 @@
 # react_calendar
-my usual react starter
+Calendar that you can choose year and month.
 
 ## usage (for dev)
 
