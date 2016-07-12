@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions';
-import {PREV_MONTH,NEXT_MONTH,SELECT_DATE,SELECT_MONTH,MONTH_NUM_TO_STRING} from './constants'
+import {PREV_MONTH,NEXT_MONTH,SELECT_DATE,SELECT_MONTH,SELECT_YEAR,MONTH_NUM_TO_STRING} from './constants'
 const initialDate = new Date();
 const initialMonth = initialDate.getMonth();
 const initialYear = initialDate.getFullYear();
@@ -58,7 +58,7 @@ function createCalendar (year, month) {
 	const numDays = computeNumberOfDaysInMonth(year, month);
 	const firstDay = computeFirstDayOfMonth(year, month);
 	return {
-		selectedDayOfMonth: initialDate.getDate(),
+		selectedDayOfMonth: 1,
 		numDays: numDays,
 		firstDay: firstDay,
 		month: month,
@@ -72,7 +72,7 @@ export default handleActions({
 	[PREV_MONTH]: (state, action) => {
 		let year = state.calendar.year;
 		let month = state.calendar.month;
-		if(state.calendar.month===0){
+		if(state.calendar.month == 0){
 			month = 11;
 			year--;
 		} else {
@@ -85,7 +85,7 @@ export default handleActions({
 	[NEXT_MONTH]: (state, action) => {
 		let year = state.calendar.year;
 		let month = state.calendar.month;
-		if (state.calendar.month === 11) {
+		if (state.calendar.month == 11) {
 			month = 0;
 			year ++;
 		} else {
@@ -109,10 +109,17 @@ export default handleActions({
 	},
 	[SELECT_MONTH]: (state, action) => {
 		let year = state.calendar.year;
-		let month = action.payload;
+		let month = action.payload.target.value;
 		return {
 			calendar: createCalendar(year, month)
 		}	
+	},
+	[SELECT_YEAR]:  (state, action) => {
+		let year = action.payload.target.value;
+		let month = state.calendar.month;
+		return {
+			calendar: createCalendar(year, month)
+		}
 	}
 },{
 	calendar: createCalendar(initialYear, initialMonth)
