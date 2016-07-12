@@ -1,4 +1,4 @@
-# react_starter
+# react_calendar
 my usual react starter
 
 ## usage (for dev)
